@@ -6,9 +6,9 @@ import { ErrorName } from '../constants';
  */
 export class DiagnosticError extends Error {
   /**
-   * The associated `DOMError` that caused this `DiagnosticError`.
+   * The associated `DOMException` that caused this `DiagnosticError`.
    */
-  domError: DOMError | DOMException | undefined;
+  domException: DOMException | Error | undefined;
   /**
    * The name of the error.
    *
@@ -23,13 +23,13 @@ export class DiagnosticError extends Error {
 
   /**
    * Immediately sets the timestamp and sets the name to `DiagnosticError`.
-   * @param domError
+   * @param domException
    * @param message
    */
-  constructor(domError?: DOMError | DOMException, message?: string) {
+  constructor(domException?: DOMException | Error, message?: string) {
     super(message);
     this.timestamp = Date.now();
-    this.domError = domError;
+    this.domException = domException;
 
     Object.setPrototypeOf(this, DiagnosticError.prototype);
 

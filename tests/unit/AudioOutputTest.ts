@@ -239,7 +239,6 @@ describe('testAudioOutputDevice', function() {
 
   ([
     [new DiagnosticError(), 'DiagnosticError'],
-    [new (global as any).DOMError(), 'DOMError'],
     [new (global as any).DOMException(), 'DOMException'],
     [new Error(), 'Error'],
     [{}, 'an unknown error'],

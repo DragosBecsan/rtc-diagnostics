@@ -305,8 +305,6 @@ describe('testAudioInputDevice', function() {
     ], [
       'DOMException', new (global as any).DOMException(),
     ], [
-      'DOMError', new (global as any).DOMError(),
-    ], [
       'Error', new Error(),
     ], [
       'unknown error', {},

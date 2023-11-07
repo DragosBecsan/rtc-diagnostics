@@ -138,7 +138,7 @@ describe('MediaConnectionBitrateTest', () => {
         setTimeout(() => pcReceiverContext.onicecandidate(event));
 
         return expectEvent('error', mediaConnectionBitrateTest).then((result: any) => {
-          assert.equal(result.domError, 'foo');
+          assert.equal(result.domException, 'foo');
         });
       });
     });
@@ -164,7 +164,7 @@ describe('MediaConnectionBitrateTest', () => {
         setTimeout(() => pcSenderContext.onicecandidate(event));
 
         return expectEvent('error', mediaConnectionBitrateTest).then((result: any) => {
-          assert.equal(result.domError, 'foo');
+          assert.equal(result.domException, 'foo');
         });
       });
     });
@@ -184,7 +184,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcSenderContext.createOffer = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to create offer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -196,7 +196,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcSenderContext.setLocalDescription = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to set local or remote description from createOffer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -208,7 +208,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcReceiverContext.setRemoteDescription = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to set local or remote description from createOffer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -220,7 +220,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcReceiverContext.createAnswer = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to create answer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -232,7 +232,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcReceiverContext.setLocalDescription = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to set local or remote description from createAnswer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -244,7 +244,7 @@ describe('MediaConnectionBitrateTest', () => {
       pcSenderContext.setRemoteDescription = () => Promise.reject('foo');
 
       return wait().then(() => {
-        sinon.assert.calledWith(callback, sinon.match.has('domError', 'foo'));
+        sinon.assert.calledWith(callback, sinon.match.has('domException', 'foo'));
         sinon.assert.calledWith(callback, sinon.match.has('message', 'Unable to set local or remote description from createAnswer'));
         sinon.assert.called(mediaConnectionBitrateTest.stop as any);
       });
@@ -654,7 +654,7 @@ describe('MediaConnectionBitrateTest', () => {
 
             mediaConnectionBitrateTest.on(MediaConnectionBitrateTest.Events.End, (report: MediaConnectionBitrateTest.Report) => {
               sinon.assert.calledOnce(onError);
-              assert.equal(report.errors[0].domError, 'Foo error');
+              assert.equal(report.errors[0].domException, 'Foo error');
               done();
             });
 

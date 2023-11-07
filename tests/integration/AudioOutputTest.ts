@@ -152,7 +152,7 @@ describe('testAudioOutputDevice', function() {
 
     it('should not have a "no supported source was found" error', function() {
       assert.equal(audioOutputTestReport.errors.length, 1);
-      const error = audioOutputTestReport.errors[0].domError;
+      const error = audioOutputTestReport.errors[0].domException;
       assert(error);
       assert.equal(error!.name, 'NotSupportedError');
     });

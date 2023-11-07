@@ -321,7 +321,7 @@ export class MediaConnectionBitrateTest extends EventEmitter {
    * @param error - The error object
    * @param isFatal - Whether this is a fatal error
    */
-  private _onError(message: string, error?: DOMError): void {
+  private _onError(message: string, error?: DOMException | Error): void {
     const diagnosticError = new DiagnosticError(error, message);
     this._errors.push(diagnosticError);
     this.emit(MediaConnectionBitrateTest.Events.Error, diagnosticError);
@@ -335,7 +335,7 @@ export class MediaConnectionBitrateTest extends EventEmitter {
   private _onIceCandidate(remotePc: RTCPeerConnection, event: RTCPeerConnectionIceEvent): void {
     if (event.candidate) {
       remotePc.addIceCandidate(event.candidate)
-        .catch((error: DOMError) => this._onError('Unable to add candidate', error));
+        .catch((error: DOMException) => this._onError('Unable to add candidate', error));
     }
   }
 
@@ -355,7 +355,7 @@ export class MediaConnectionBitrateTest extends EventEmitter {
     return Promise.all([
       this._pcReceiver.setLocalDescription(answer),
       this._pcSender.setRemoteDescription(answer),
-    ]).catch((error: DOMError) =>
+    ]).catch((error: DOMException) =>
       this._onError('Unable to set local or remote description from createAnswer', error));
   }
 
@@ -367,7 +367,7 @@ export class MediaConnectionBitrateTest extends EventEmitter {
     return Promise.all([
       this._pcSender.setLocalDescription(offer),
       this._pcReceiver.setRemoteDescription(offer),
-    ]).catch((error: DOMError) =>
+    ]).catch((error: DOMException) =>
       this._onError('Unable to set local or remote description from createOffer', error));
   }
 
@@ -419,7 +419,7 @@ export class MediaConnectionBitrateTest extends EventEmitter {
             this._iceCandidateStats = statsReport.iceCandidateStats;
             this._selectedIceCandidatePairStats = statsReport.selectedIceCandidatePairStats;
           })
-          .catch((error: DOMError) => {
+          .catch((error: DOMException) => {
             this._onError('Unable to generate WebRTC stats report', error);
           });
       }
