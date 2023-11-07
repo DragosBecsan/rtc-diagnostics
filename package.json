@@ -17,7 +17,8 @@
     "status": "git status",
     "test": "npm-run-all lint build test:unit test:integration",
     "test:unit": "nyc mocha -r ts-node/register ./tests/unit/index.ts",
-    "test:integration": "node ./scripts/env.js && karma start"
+    "test:integration": "node ./scripts/env.js && karma start",
+    "prepare": "npm run build:es5"
   },
   "contributors": [
     "Michael Huynh",
